@@ -154,7 +154,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ResponsesDAL.cs" />
-    <Compile Include="SoapParser.cs" />
     <Compile Include="Web References\iQueue\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
