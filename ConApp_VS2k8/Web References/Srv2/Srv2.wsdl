@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="Srv2" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="Srv2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="Srv2">
+      <s:element name="SaveSurveyStructure">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="surveyDef" type="tns:SurveyStructureDef" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SurveyStructureDef">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SurveyId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CorporaiotnId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Questions" type="tns:ArrayOfQuestion" />
+          <s:element minOccurs="0" maxOccurs="1" name="Prompts" type="tns:ArrayOfPrompt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfQuestion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Question" nillable="true" type="tns:Question" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Question">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="QuestionId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Text" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Order" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsRequired" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuestionTypeId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnswerTypeId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Answers" type="tns:ArrayOfAnswer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAnswer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Answer" nillable="true" type="tns:Answer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Answer">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AnswerId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Order" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPrompt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Prompt" nillable="true" type="tns:Prompt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Prompt">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PromptId" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Text" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Order" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidationTableId" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveSurveyStructureResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveSurveyStructureResult" type="tns:SaveSurveyStructureResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SaveSurveyStructureResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Srv2ResultBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Srv2ResultBase">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveSurveyResult">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="surveyResult" type="tns:SurveyResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SurveyResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SurveyResultId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="SurveyId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="LocationId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDateUtc" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Duration" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PromptResults" type="tns:ArrayOfPromptResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuestionResults" type="tns:ArrayOfQuestionResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPromptResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PromptResult" nillable="true" type="tns:PromptResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PromptResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PromptId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidationTableItemId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="WasDisplayed" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="Answered" type="s:unsignedByte" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfQuestionResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="QuestionResult" nillable="true" type="tns:QuestionResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="QuestionResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="QuestionId" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnswerId" nillable="true" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="WasDisplayed" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="Answered" type="s:unsignedByte" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveSurveyResultResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveSurveyResultResult" type="tns:SaveSurveyResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SaveSurveyResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Srv2ResultBase" />
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SaveSurveyStructureSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveSurveyStructure" />
+  </wsdl:message>
+  <wsdl:message name="SaveSurveyStructureSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveSurveyStructureResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveSurveyResultSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveSurveyResult" />
+  </wsdl:message>
+  <wsdl:message name="SaveSurveyResultSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveSurveyResultResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Srv2Soap">
+    <wsdl:operation name="SaveSurveyStructure">
+      <wsdl:input message="tns:SaveSurveyStructureSoapIn" />
+      <wsdl:output message="tns:SaveSurveyStructureSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSurveyResult">
+      <wsdl:input message="tns:SaveSurveyResultSoapIn" />
+      <wsdl:output message="tns:SaveSurveyResultSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Srv2Soap" type="tns:Srv2Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveSurveyStructure">
+      <soap:operation soapAction="Srv2/SaveSurveyStructure" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSurveyResult">
+      <soap:operation soapAction="Srv2/SaveSurveyResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Srv2Soap12" type="tns:Srv2Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveSurveyStructure">
+      <soap12:operation soapAction="Srv2/SaveSurveyStructure" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSurveyResult">
+      <soap12:operation soapAction="Srv2/SaveSurveyResult" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Srv2">
+    <wsdl:port name="Srv2Soap" binding="tns:Srv2Soap">
+      <soap:address location="http://dpolrssrv/Srv2/Srv2.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Srv2Soap12" binding="tns:Srv2Soap12">
+      <soap12:address location="http://dpolrssrv/Srv2/Srv2.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

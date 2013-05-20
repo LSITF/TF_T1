@@ -1,0 +1,1079 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="GuestConnect" xmlns:s1="GuestConnect/AbstractTypes" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="GuestConnect" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="GuestConnect">
+      <s:element name="SaveGuest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="guest" type="tns:Guest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Guest">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" nillable="true" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimeIn" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SeatTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReservationTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReservationStatus" nillable="true" type="tns:DictReservationStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="EstWaitTime" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NoShow" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Smoking" nillable="true" type="tns:Smoking" />
+          <s:element minOccurs="0" maxOccurs="1" name="SeatingPreferences" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocalUID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TableId" nillable="true" type="s:long" />
+        </s:sequence>
+        <s:attribute name="Name" type="s:string" />
+        <s:attribute name="ReceiverType" type="tns:DictReceiverType" use="required" />
+        <s:attribute name="ReceiverNo" type="s:string" />
+        <s:attribute name="Size" type="s:int" use="required" />
+        <s:attribute name="IsVip" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:simpleType name="DictReservationStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Pending" />
+          <s:enumeration value="Approved" />
+          <s:enumeration value="Canceled" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="Smoking">
+        <s:restriction base="s:string">
+          <s:enumeration value="No" />
+          <s:enumeration value="Yes" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="DictReceiverType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Pager" />
+          <s:enumeration value="Phone" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SaveGuestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveGuestResult" type="tns:ActionReturnOfSaveGuestStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfSaveGuestStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AddData" type="tns:SaveGuestStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfSaveGuestStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SaveGuestStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="GuidNotFound" />
+          <s:enumeration value="RestaurantInactive" />
+          <s:enumeration value="ProductInactive" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ActionReturnStatusEnumOfSaveGuestStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetGuests">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lastSyncTime" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGuestsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGuestsResult" type="tns:ActionReturnOfGetGuestsReturn" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfGetGuestsReturn">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:GetGuestsReturn" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfGetGuestsReturn" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GetGuestsReturn">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:GetGuestsStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="Guests" type="tns:ArrayOfGuest" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentSyncDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="GetGuestsStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="GuidNotFound" />
+          <s:enumeration value="RestaurantInactive" />
+          <s:enumeration value="ProductInactive" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfGuest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Guest" nillable="true" type="tns:Guest" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ActionReturnStatusEnumOfGetGuestsReturn">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SendSms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendSmsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSmsResult" type="tns:ActionReturnOfSendSmsStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfSendSmsStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AddData" type="tns:SendSmsStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfSendSmsStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SendSmsStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="GuidNotFound" />
+          <s:enumeration value="RestaurantInactive" />
+          <s:enumeration value="ProductInactive" />
+          <s:enumeration value="SmsInactive" />
+          <s:enumeration value="NotEnoughFunds" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ActionReturnStatusEnumOfSendSmsStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="PageGuest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PageGuestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PageGuestResult" type="tns:ActionReturnOfPageGuestStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfPageGuestStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AddData" type="tns:PageGuestStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfPageGuestStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="PageGuestStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="GuidNotFound" />
+          <s:enumeration value="RestaurantInactive" />
+          <s:enumeration value="ProductInactive" />
+          <s:enumeration value="SmsInactive" />
+          <s:enumeration value="NotEnoughFunds" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ActionReturnStatusEnumOfPageGuestStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SaveConfiguration">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="configuration" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveConfigurationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveConfigurationResult" type="tns:ActionReturnOfSaveConfigStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfSaveConfigStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AddData" type="tns:SaveConfigStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfSaveConfigStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SaveConfigStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="GuidNotFound" />
+          <s:enumeration value="RestaurantInactive" />
+          <s:enumeration value="ProductInactive" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ActionReturnStatusEnumOfSaveConfigStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="RestoreConfiguration">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RestoreConfigurationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RestoreConfigurationResult" type="tns:ActionReturnOfRestoreConfigurationReturn" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfRestoreConfigurationReturn">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:RestoreConfigurationReturn" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfRestoreConfigurationReturn" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RestoreConfigurationReturn">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:RestoreConfigStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="Configuration" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="RestoreConfigStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="GuidNotFound" />
+          <s:enumeration value="RestaurantInactive" />
+          <s:enumeration value="ProductInactive" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ActionReturnStatusEnumOfRestoreConfigurationReturn">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetCompanyLogo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCompanyLogoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCompanyLogoResult" type="tns:ActionReturnOfGetCompanyLogoReturn" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfGetCompanyLogoReturn">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:GetCompanyLogoReturn" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfGetCompanyLogoReturn" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GetCompanyLogoReturn">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:GlobalStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="File" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="GlobalStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="GuidNotFound" />
+          <s:enumeration value="RestaurantInactive" />
+          <s:enumeration value="ProductInactive" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ActionReturnStatusEnumOfGetCompanyLogoReturn">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetCompanyInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCompanyInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCompanyInfoResult" type="tns:ActionReturnOfGetCompanyInfoReturn" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfGetCompanyInfoReturn">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:GetCompanyInfoReturn" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfGetCompanyInfoReturn" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GetCompanyInfoReturn">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:GlobalStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="CorporationName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ActionReturnStatusEnumOfGetCompanyInfoReturn">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SaveTable">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="table" type="tns:Table" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Table">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" nillable="true" type="s:long" />
+        </s:sequence>
+        <s:attribute name="Name" type="s:string" />
+        <s:attribute name="TableStatus" type="tns:DictGcTableStatus" use="required" />
+        <s:attribute name="LastChangeStatusTime" type="s:dateTime" use="required" />
+        <s:attribute name="LockRequested" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:simpleType name="DictGcTableStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="open" />
+          <s:enumeration value="hold" />
+          <s:enumeration value="bussed" />
+          <s:enumeration value="seated" />
+          <s:enumeration value="closed" />
+          <s:enumeration value="deleted" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SaveTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveTableResult" type="tns:ActionReturnOfSaveTableStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfSaveTableStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AddData" type="tns:SaveTableStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfSaveTableStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SaveTableStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="GuidNotFound" />
+          <s:enumeration value="RestaurantInactive" />
+          <s:enumeration value="ProductInactive" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ActionReturnStatusEnumOfSaveTableStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetTables">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="lastSyncTime" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTablesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTablesResult" type="tns:ActionReturnOfGetTablesReturn" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfGetTablesReturn">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:GetTablesReturn" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfGetTablesReturn" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GetTablesReturn">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:GetTablesStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tables" type="tns:ArrayOfTable" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentSyncDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="GetTablesStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="GuidNotFound" />
+          <s:enumeration value="RestaurantInactive" />
+          <s:enumeration value="ProductInactive" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfTable">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Table" nillable="true" type="tns:Table" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ActionReturnStatusEnumOfGetTablesReturn">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ActionReturnOfSendSmsStatus" nillable="true" type="tns:ActionReturnOfSendSmsStatus" />
+      <s:element name="ActionReturnOfPageGuestStatus" nillable="true" type="tns:ActionReturnOfPageGuestStatus" />
+      <s:element name="ActionReturnOfSaveConfigStatus" nillable="true" type="tns:ActionReturnOfSaveConfigStatus" />
+      <s:element name="ActionReturnOfRestoreConfigurationReturn" nillable="true" type="tns:ActionReturnOfRestoreConfigurationReturn" />
+      <s:element name="ActionReturnOfGetCompanyLogoReturn" nillable="true" type="tns:ActionReturnOfGetCompanyLogoReturn" />
+      <s:element name="ActionReturnOfGetCompanyInfoReturn" nillable="true" type="tns:ActionReturnOfGetCompanyInfoReturn" />
+    </s:schema>
+    <s:schema targetNamespace="GuestConnect/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SaveGuestSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveGuest" />
+  </wsdl:message>
+  <wsdl:message name="SaveGuestSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveGuestResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGuestsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGuests" />
+  </wsdl:message>
+  <wsdl:message name="GetGuestsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGuestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSms" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PageGuestSoapIn">
+    <wsdl:part name="parameters" element="tns:PageGuest" />
+  </wsdl:message>
+  <wsdl:message name="PageGuestSoapOut">
+    <wsdl:part name="parameters" element="tns:PageGuestResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveConfigurationSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveConfiguration" />
+  </wsdl:message>
+  <wsdl:message name="SaveConfigurationSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveConfigurationResponse" />
+  </wsdl:message>
+  <wsdl:message name="RestoreConfigurationSoapIn">
+    <wsdl:part name="parameters" element="tns:RestoreConfiguration" />
+  </wsdl:message>
+  <wsdl:message name="RestoreConfigurationSoapOut">
+    <wsdl:part name="parameters" element="tns:RestoreConfigurationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyLogoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCompanyLogo" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyLogoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCompanyLogoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCompanyInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCompanyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveTableSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveTable" />
+  </wsdl:message>
+  <wsdl:message name="SaveTableSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTablesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTables" />
+  </wsdl:message>
+  <wsdl:message name="GetTablesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTablesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsHttpGetIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="phoneNo" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfSendSmsStatus" />
+  </wsdl:message>
+  <wsdl:message name="PageGuestHttpGetIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="phoneNo" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="PageGuestHttpGetOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfPageGuestStatus" />
+  </wsdl:message>
+  <wsdl:message name="SaveConfigurationHttpGetIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+    <wsdl:part name="configuration" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveConfigurationHttpGetOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfSaveConfigStatus" />
+  </wsdl:message>
+  <wsdl:message name="RestoreConfigurationHttpGetIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RestoreConfigurationHttpGetOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfRestoreConfigurationReturn" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyLogoHttpGetIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyLogoHttpGetOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfGetCompanyLogoReturn" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpGetIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfGetCompanyInfoReturn" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsHttpPostIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="phoneNo" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfSendSmsStatus" />
+  </wsdl:message>
+  <wsdl:message name="PageGuestHttpPostIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="phoneNo" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="PageGuestHttpPostOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfPageGuestStatus" />
+  </wsdl:message>
+  <wsdl:message name="SaveConfigurationHttpPostIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+    <wsdl:part name="configuration" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveConfigurationHttpPostOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfSaveConfigStatus" />
+  </wsdl:message>
+  <wsdl:message name="RestoreConfigurationHttpPostIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RestoreConfigurationHttpPostOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfRestoreConfigurationReturn" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyLogoHttpPostIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyLogoHttpPostOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfGetCompanyLogoReturn" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpPostIn">
+    <wsdl:part name="guid" type="s:string" />
+    <wsdl:part name="version" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:ActionReturnOfGetCompanyInfoReturn" />
+  </wsdl:message>
+  <wsdl:portType name="GuestConnectSoap">
+    <wsdl:operation name="SaveGuest">
+      <wsdl:input message="tns:SaveGuestSoapIn" />
+      <wsdl:output message="tns:SaveGuestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGuests">
+      <wsdl:input message="tns:GetGuestsSoapIn" />
+      <wsdl:output message="tns:GetGuestsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <wsdl:input message="tns:SendSmsSoapIn" />
+      <wsdl:output message="tns:SendSmsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PageGuest">
+      <wsdl:input message="tns:PageGuestSoapIn" />
+      <wsdl:output message="tns:PageGuestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveConfiguration">
+      <wsdl:input message="tns:SaveConfigurationSoapIn" />
+      <wsdl:output message="tns:SaveConfigurationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RestoreConfiguration">
+      <wsdl:input message="tns:RestoreConfigurationSoapIn" />
+      <wsdl:output message="tns:RestoreConfigurationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyLogo">
+      <wsdl:input message="tns:GetCompanyLogoSoapIn" />
+      <wsdl:output message="tns:GetCompanyLogoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <wsdl:input message="tns:GetCompanyInfoSoapIn" />
+      <wsdl:output message="tns:GetCompanyInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTable">
+      <wsdl:input message="tns:SaveTableSoapIn" />
+      <wsdl:output message="tns:SaveTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTables">
+      <wsdl:input message="tns:GetTablesSoapIn" />
+      <wsdl:output message="tns:GetTablesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GuestConnectHttpGet">
+    <wsdl:operation name="SendSms">
+      <wsdl:input message="tns:SendSmsHttpGetIn" />
+      <wsdl:output message="tns:SendSmsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PageGuest">
+      <wsdl:input message="tns:PageGuestHttpGetIn" />
+      <wsdl:output message="tns:PageGuestHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveConfiguration">
+      <wsdl:input message="tns:SaveConfigurationHttpGetIn" />
+      <wsdl:output message="tns:SaveConfigurationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RestoreConfiguration">
+      <wsdl:input message="tns:RestoreConfigurationHttpGetIn" />
+      <wsdl:output message="tns:RestoreConfigurationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyLogo">
+      <wsdl:input message="tns:GetCompanyLogoHttpGetIn" />
+      <wsdl:output message="tns:GetCompanyLogoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <wsdl:input message="tns:GetCompanyInfoHttpGetIn" />
+      <wsdl:output message="tns:GetCompanyInfoHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GuestConnectHttpPost">
+    <wsdl:operation name="SendSms">
+      <wsdl:input message="tns:SendSmsHttpPostIn" />
+      <wsdl:output message="tns:SendSmsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PageGuest">
+      <wsdl:input message="tns:PageGuestHttpPostIn" />
+      <wsdl:output message="tns:PageGuestHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveConfiguration">
+      <wsdl:input message="tns:SaveConfigurationHttpPostIn" />
+      <wsdl:output message="tns:SaveConfigurationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RestoreConfiguration">
+      <wsdl:input message="tns:RestoreConfigurationHttpPostIn" />
+      <wsdl:output message="tns:RestoreConfigurationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyLogo">
+      <wsdl:input message="tns:GetCompanyLogoHttpPostIn" />
+      <wsdl:output message="tns:GetCompanyLogoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <wsdl:input message="tns:GetCompanyInfoHttpPostIn" />
+      <wsdl:output message="tns:GetCompanyInfoHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GuestConnectSoap" type="tns:GuestConnectSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveGuest">
+      <soap:operation soapAction="GuestConnect/SaveGuest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGuests">
+      <soap:operation soapAction="GuestConnect/GetGuests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <soap:operation soapAction="GuestConnect/SendSms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PageGuest">
+      <soap:operation soapAction="GuestConnect/PageGuest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveConfiguration">
+      <soap:operation soapAction="GuestConnect/SaveConfiguration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreConfiguration">
+      <soap:operation soapAction="GuestConnect/RestoreConfiguration" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyLogo">
+      <soap:operation soapAction="GuestConnect/GetCompanyLogo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <soap:operation soapAction="GuestConnect/GetCompanyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTable">
+      <soap:operation soapAction="GuestConnect/SaveTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTables">
+      <soap:operation soapAction="GuestConnect/GetTables" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GuestConnectSoap12" type="tns:GuestConnectSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveGuest">
+      <soap12:operation soapAction="GuestConnect/SaveGuest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGuests">
+      <soap12:operation soapAction="GuestConnect/GetGuests" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <soap12:operation soapAction="GuestConnect/SendSms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PageGuest">
+      <soap12:operation soapAction="GuestConnect/PageGuest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveConfiguration">
+      <soap12:operation soapAction="GuestConnect/SaveConfiguration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreConfiguration">
+      <soap12:operation soapAction="GuestConnect/RestoreConfiguration" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyLogo">
+      <soap12:operation soapAction="GuestConnect/GetCompanyLogo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <soap12:operation soapAction="GuestConnect/GetCompanyInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTable">
+      <soap12:operation soapAction="GuestConnect/SaveTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTables">
+      <soap12:operation soapAction="GuestConnect/GetTables" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GuestConnectHttpGet" type="tns:GuestConnectHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SendSms">
+      <http:operation location="/SendSms" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PageGuest">
+      <http:operation location="/PageGuest" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveConfiguration">
+      <http:operation location="/SaveConfiguration" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreConfiguration">
+      <http:operation location="/RestoreConfiguration" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyLogo">
+      <http:operation location="/GetCompanyLogo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <http:operation location="/GetCompanyInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GuestConnectHttpPost" type="tns:GuestConnectHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SendSms">
+      <http:operation location="/SendSms" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PageGuest">
+      <http:operation location="/PageGuest" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveConfiguration">
+      <http:operation location="/SaveConfiguration" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreConfiguration">
+      <http:operation location="/RestoreConfiguration" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyLogo">
+      <http:operation location="/GetCompanyLogo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <http:operation location="/GetCompanyInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GuestConnect">
+    <wsdl:port name="GuestConnectSoap" binding="tns:GuestConnectSoap">
+      <soap:address location="http://guestconnect.pager.net/GuestConnect.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GuestConnectSoap12" binding="tns:GuestConnectSoap12">
+      <soap12:address location="http://guestconnect.pager.net/GuestConnect.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GuestConnectHttpGet" binding="tns:GuestConnectHttpGet">
+      <http:address location="http://guestconnect.pager.net/GuestConnect.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GuestConnectHttpPost" binding="tns:GuestConnectHttpPost">
+      <http:address location="http://guestconnect.pager.net/GuestConnect.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="Lenovo" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="Lenovo" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="Lenovo">
+      <s:element name="LocationCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LocationCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LocationCheckResult" type="tns:ActionReturnOfLocationInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfLocationInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:LocationInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfLocationInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LocationInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LocationFound" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsConfigUpToDate" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TokenBalance" nillable="true" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="IncomingSmsExists" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsManagerPinClearing" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ManagerPin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InstallUrl" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ActionReturnStatusEnumOfLocationInfo">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetConfig">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfigResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConfigResult" type="tns:ActionReturnOfLocationConfig" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfLocationConfig">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:LocationConfig" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfLocationConfig" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LocationConfig">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Layouts" type="tns:ArrayOfLayout" />
+          <s:element minOccurs="0" maxOccurs="1" name="Employees" type="tns:ArrayOfEmployee" />
+          <s:element minOccurs="0" maxOccurs="1" name="Buttons" type="tns:ArrayOfButton" />
+          <s:element minOccurs="0" maxOccurs="1" name="Wifi" type="tns:WiFi" />
+        </s:sequence>
+        <s:attribute name="IsCellPhonePagingEnabled" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfLayout">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Layout" nillable="true" type="tns:Layout" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Layout">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Sections" type="tns:ArrayOfSection" />
+        </s:sequence>
+        <s:attribute name="Id" type="s:long" use="required" />
+        <s:attribute name="Name" type="s:string" />
+        <s:attribute name="IsDefault" type="s:int" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfSection">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Section" nillable="true" type="tns:Section" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Section">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ColorTimersForWarning" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ColorTimersForSecondWarning" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ColorTimersForAlert" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PagingManagerSeconds" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PagingManagerMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tables" type="tns:ArrayOfTable" />
+        </s:sequence>
+        <s:attribute name="Id" type="s:long" use="required" />
+        <s:attribute name="Name" type="s:string" />
+        <s:attribute name="ColorTimersForWarningIsEnabled" type="s:boolean" use="required" />
+        <s:attribute name="ColorTimersForSecondWarningIsEnabled" type="s:boolean" use="required" />
+        <s:attribute name="ColorTimersForAlertIsEnabled" type="s:boolean" use="required" />
+        <s:attribute name="PagingManagerIsEnabled" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfTable">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Table" nillable="true" type="tns:Table" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Table">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BeachButlerWhoToPage" nillable="true" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="BeachButlerMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TGLeftButtonWhoToPage" nillable="true" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="TableGenieLeftButtonMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TGMiddleButtonWhoToPage" nillable="true" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="TableGenieMiddleButtonMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TGRightButtonWhoToPage" nillable="true" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="TableGenieRightButtonMessage" type="s:string" />
+        </s:sequence>
+        <s:attribute name="Id" type="s:long" use="required" />
+        <s:attribute name="Number" type="s:int" use="required" />
+        <s:attribute name="ServiceDeviceId" type="s:long" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfEmployee">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Employee" nillable="true" type="tns:Employee" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Employee">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PageType" type="tns:PageType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+        </s:sequence>
+        <s:attribute name="Id" type="s:long" use="required" />
+        <s:attribute name="Name" type="s:string" />
+      </s:complexType>
+      <s:simpleType name="PageType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Pager" />
+          <s:enumeration value="Phone" />
+          <s:enumeration value="None" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfButton">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Button" nillable="true" type="tns:Button" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Button">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MessageText" type="s:string" />
+        </s:sequence>
+        <s:attribute name="Id" type="s:long" use="required" />
+        <s:attribute name="ButtonText" type="s:string" />
+        <s:attribute name="EmployeeType" type="tns:EmployeeType" use="required" />
+        <s:attribute name="ButtonOrder" type="s:long" use="required" />
+        <s:attribute name="IsMessageDefined" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:simpleType name="EmployeeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="Waiter" />
+          <s:enumeration value="Manager" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="WiFi">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="WelcomeMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TableNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TablePrompt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ButtonText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TableErrorText" type="s:string" />
+        </s:sequence>
+        <s:attribute name="IsEnable" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:simpleType name="ActionReturnStatusEnumOfLocationConfig">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetConfig2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="syncList" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAnyType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ActionReturnOfLocationSyncConfig">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:LocationSyncConfig" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfLocationSyncConfig" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LocationSyncConfig">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SyncList" type="tns:ArrayOfChoice1" />
+        </s:sequence>
+        <s:attribute name="IsCellPhonePagingEnabled" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfChoice1">
+        <s:choice minOccurs="0" maxOccurs="unbounded">
+          <s:element minOccurs="1" maxOccurs="1" name="Buttons" nillable="true" type="tns:ArrayOfButtonSync" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tables" nillable="true" type="tns:ArrayOfTableSync" />
+        </s:choice>
+      </s:complexType>
+      <s:complexType name="ArrayOfButtonSync">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ButtonSync" nillable="true" type="tns:ButtonSync" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ButtonSync">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SyncBaseObj">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="MessageText" type="s:string" />
+            </s:sequence>
+            <s:attribute name="ButtonText" type="s:string" />
+            <s:attribute name="EmployeeType" type="tns:EmployeeType" use="required" />
+            <s:attribute name="ButtonOrder" type="s:long" use="required" />
+            <s:attribute name="IsMessageDefined" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SyncBaseObj">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="WlDbId" nillable="true" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClientId" nillable="true" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="ModifyStatus" nillable="true" type="tns:ModifyStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="SyncStatus" nillable="true" type="tns:SyncStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ModifyStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Deleted" />
+          <s:enumeration value="Normal" />
+          <s:enumeration value="Modified" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="SyncStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Error" />
+          <s:enumeration value="Success" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="TableSync">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SyncBaseObj">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SerialNo" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="BeachButlerWhoToPage" nillable="true" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="BeachButlerMessage" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TGLeftButtonWhoToPage" nillable="true" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="TableGenieLeftButtonMessage" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TGMiddleButtonWhoToPage" nillable="true" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="TableGenieMiddleButtonMessage" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TGRightButtonWhoToPage" nillable="true" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="TableGenieRightButtonMessage" type="s:string" />
+            </s:sequence>
+            <s:attribute name="Number" type="s:int" use="required" />
+            <s:attribute name="ServiceDeviceId" type="s:long" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfTableSync">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TableSync" nillable="true" type="tns:TableSync" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ActionReturnStatusEnumOfLocationSyncConfig">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetConfig2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetConfig2Result" type="tns:ActionReturnOfLocationSyncConfig" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfSendSmsReturnValues">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AddData" type="tns:SendSmsReturnValues" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfSendSmsReturnValues" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SendSmsReturnValues">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="Ok" />
+          <s:enumeration value="NotEnoughFunds" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="LocationInactive" />
+          <s:enumeration value="SmsDisabled" />
+          <s:enumeration value="LocationNotFound" />
+          <s:enumeration value="IncorrectPhoneNo" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ActionReturnStatusEnumOfSendSmsReturnValues">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SendSmsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSmsResult" type="tns:ActionReturnOfSendSmsReturnValues" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIncommingSms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfIncomingSmsList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:ArrayOfIncomingSms" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfIncomingSmsList" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfIncomingSms">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IncomingSms" nillable="true" type="tns:IncomingSms" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IncomingSms">
+        <s:attribute name="Message" type="s:string" />
+        <s:attribute name="Type" type="tns:WLIncomingSmsType" use="required" />
+      </s:complexType>
+      <s:simpleType name="WLIncomingSmsType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Incoming" />
+          <s:enumeration value="TableClosed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ActionReturnStatusEnumOfIncomingSmsList">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetIncommingSmsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIncommingSmsResult" type="tns:ActionReturnOfIncomingSmsList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LocationCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:LocationCheck" />
+  </wsdl:message>
+  <wsdl:message name="LocationCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:LocationCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConfig" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConfig2SoapIn">
+    <wsdl:part name="parameters" element="tns:GetConfig2" />
+  </wsdl:message>
+  <wsdl:message name="GetConfig2SoapOut">
+    <wsdl:part name="parameters" element="tns:GetConfig2Response" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSms" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIncommingSmsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIncommingSms" />
+  </wsdl:message>
+  <wsdl:message name="GetIncommingSmsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIncommingSmsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LenovoSoap">
+    <wsdl:operation name="LocationCheck">
+      <wsdl:input message="tns:LocationCheckSoapIn" />
+      <wsdl:output message="tns:LocationCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfig">
+      <wsdl:input message="tns:GetConfigSoapIn" />
+      <wsdl:output message="tns:GetConfigSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfig2">
+      <wsdl:input message="tns:GetConfig2SoapIn" />
+      <wsdl:output message="tns:GetConfig2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <wsdl:input message="tns:SendSmsSoapIn" />
+      <wsdl:output message="tns:SendSmsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIncommingSms">
+      <wsdl:input message="tns:GetIncommingSmsSoapIn" />
+      <wsdl:output message="tns:GetIncommingSmsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LenovoSoap" type="tns:LenovoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LocationCheck">
+      <soap:operation soapAction="Lenovo/LocationCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfig">
+      <soap:operation soapAction="Lenovo/GetConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfig2">
+      <soap:operation soapAction="Lenovo/GetConfig2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <soap:operation soapAction="Lenovo/SendSms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncommingSms">
+      <soap:operation soapAction="Lenovo/GetIncommingSms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LenovoSoap12" type="tns:LenovoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LocationCheck">
+      <soap12:operation soapAction="Lenovo/LocationCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfig">
+      <soap12:operation soapAction="Lenovo/GetConfig" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfig2">
+      <soap12:operation soapAction="Lenovo/GetConfig2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <soap12:operation soapAction="Lenovo/SendSms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIncommingSms">
+      <soap12:operation soapAction="Lenovo/GetIncommingSms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Lenovo">
+    <wsdl:port name="LenovoSoap" binding="tns:LenovoSoap">
+      <soap:address location="http://wswl.smsvalet.com/Lenovo.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LenovoSoap12" binding="tns:LenovoSoap12">
+      <soap12:address location="http://wswl.smsvalet.com/Lenovo.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SaveDataAndConfig">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:LRSTablerTrackerRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LRSTablerTrackerRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LocationUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orders" type="tns:ArrayOfLRSTableTrackerOrderDto" />
+          <s:element minOccurs="0" maxOccurs="1" name="Configuration" type="tns:LRSTablerTrackerConfigurationDto" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLRSTableTrackerOrderDto">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LRSTableTrackerOrderDto" nillable="true" type="tns:LRSTableTrackerOrderDto" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LRSTableTrackerOrderDto">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OrderNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TableNumber" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClosedType" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TableTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="wasPageSent" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="LocalId" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LRSTablerTrackerConfigurationDto">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="WarningTime" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsWarningTime" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="SecondWarningTime" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSecondWarningTime" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="ServiceGoalExceeded" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsServiceGoalExceeded" type="s:unsignedByte" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveDataAndConfigResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveDataAndConfigResult" type="tns:LRSTablerTrackerResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LRSTablerTrackerResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SucceededOrders" type="tns:ArrayOfLong" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:LRSTableTrackerResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLong">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="long" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="LRSTableTrackerResult">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="Disabled" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SaveDataAndConfig2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:LRSTablerTrackerRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveDataAndConfig2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveDataAndConfig2Result" type="tns:LRSTablerTrackerResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="locationUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendMessageResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMessage2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="locationUid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMessage2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SendMessage2Result" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SaveDataAndConfigSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveDataAndConfig" />
+  </wsdl:message>
+  <wsdl:message name="SaveDataAndConfigSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveDataAndConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveDataAndConfig2SoapIn">
+    <wsdl:part name="parameters" element="tns:SaveDataAndConfig2" />
+  </wsdl:message>
+  <wsdl:message name="SaveDataAndConfig2SoapOut">
+    <wsdl:part name="parameters" element="tns:SaveDataAndConfig2Response" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendMessage2SoapIn">
+    <wsdl:part name="parameters" element="tns:SendMessage2" />
+  </wsdl:message>
+  <wsdl:message name="SendMessage2SoapOut">
+    <wsdl:part name="parameters" element="tns:SendMessage2Response" />
+  </wsdl:message>
+  <wsdl:portType name="TableTrackerSoap">
+    <wsdl:operation name="SaveDataAndConfig">
+      <wsdl:input message="tns:SaveDataAndConfigSoapIn" />
+      <wsdl:output message="tns:SaveDataAndConfigSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveDataAndConfig2">
+      <wsdl:input message="tns:SaveDataAndConfig2SoapIn" />
+      <wsdl:output message="tns:SaveDataAndConfig2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:input message="tns:SendMessageSoapIn" />
+      <wsdl:output message="tns:SendMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage2">
+      <wsdl:input message="tns:SendMessage2SoapIn" />
+      <wsdl:output message="tns:SendMessage2SoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TableTrackerSoap" type="tns:TableTrackerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveDataAndConfig">
+      <soap:operation soapAction="http://tempuri.org/SaveDataAndConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveDataAndConfig2">
+      <soap:operation soapAction="http://tempuri.org/SaveDataAndConfig2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap:operation soapAction="http://tempuri.org/SendMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage2">
+      <soap:operation soapAction="http://tempuri.org/SendMessage2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TableTrackerSoap12" type="tns:TableTrackerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveDataAndConfig">
+      <soap12:operation soapAction="http://tempuri.org/SaveDataAndConfig" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveDataAndConfig2">
+      <soap12:operation soapAction="http://tempuri.org/SaveDataAndConfig2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap12:operation soapAction="http://tempuri.org/SendMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage2">
+      <soap12:operation soapAction="http://tempuri.org/SendMessage2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TableTracker">
+    <wsdl:port name="TableTrackerSoap" binding="tns:TableTrackerSoap">
+      <soap:address location="http://localhost/LRSTableTrackerWS/TableTracker.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TableTrackerSoap12" binding="tns:TableTrackerSoap12">
+      <soap12:address location="http://localhost/LRSTableTrackerWS/TableTracker.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

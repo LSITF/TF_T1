@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{535DA6D9-16EB-4C75-B34A-557088A2C298}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConApp_VS2k8</RootNamespace>
+    <AssemblyName>ConApp_VS2k8</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignManifests>true</SignManifests>
+    <ManifestCertificateThumbprint>3EAC7611A40B0B29289DB6BBFAA085FE04A4F227</ManifestCertificateThumbprint>
+    <ManifestKeyFile>CodePagerNetCertReq_LLC_Dallas.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ephtmltopdf, Version=5.4.0.19044, Culture=neutral, PublicKeyToken=5b5f377bc08a4d32, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\ephtmltopdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Lsi.Libs.LSIBastionCommon, Version=1.1.0.0, Culture=neutral, PublicKeyToken=5f91e6c54d2f8a7c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Lsi.Libs.LSIBastionCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="Lsi.Libs.LsiDbLayer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=26326c845764fe00, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Lsi.Libs.LsiDbLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="Lsi.Libs.LsiNLogger, Version=1.0.0.0, Culture=neutral, PublicKeyToken=15b91eed0df56035, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Lsi.Libs.LsiNLogger.dll</HintPath>
+    </Reference>
+    <Reference Include="Lsi.Libs.LsiUtils, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8e2166d0b00bc6dc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Lsi.Libs.LsiUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="Lsi.LrsSrv2Bll, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6f47cd204ca421b4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Lsi.LrsSrv2Bll.dll</HintPath>
+    </Reference>
+    <Reference Include="Lsi.LrsTableTracker.Dal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e191843b8c842a2f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Projects\REPO_LRS\trunk\LRSTableTracker\Dal\bin\Release\Lsi.LrsTableTracker.Dal.dll</HintPath>
+    </Reference>
+    <Reference Include="Lsi.LrsTableTracker.Dto, Version=1.0.0.0, Culture=neutral, PublicKeyToken=56194720db34eea7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Projects\REPO_LRS\trunk\LRSTableTracker\Dal\bin\Release\Lsi.LrsTableTracker.Dto.dll</HintPath>
+    </Reference>
+    <Reference Include="Lsi.LrsTimeZone.LrsTimeZoneBll, Version=1.0.0.0, Culture=neutral, PublicKeyToken=532eaed8ef763391, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Lsi.LrsTimeZone.LrsTimeZoneBll.dll</HintPath>
+    </Reference>
+    <Reference Include="Lsi.PlayPaq.Dal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b0bc23688d1bf4e5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Projects\REPO_LRS\trunk\LRSPlayPaq\LrsData\Dal\bin\Debug\Lsi.PlayPaq.Dal.dll</HintPath>
+    </Reference>
+    <Reference Include="Lsi.PlayPaq.Dto, Version=1.0.0.0, Culture=neutral, PublicKeyToken=359d3070eee41c5d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Projects\REPO_LRS\trunk\LRSPlayPaq\LrsData\Dal\bin\Debug\Lsi.PlayPaq.Dto.dll</HintPath>
+    </Reference>
+    <Reference Include="NativeExcel, Version=2.0.18.0, Culture=neutral, PublicKeyToken=8e39ab1f1c5149a0, processorArchitecture=MSIL" />
+    <Reference Include="PublicDomain, Version=0.2.47.0, Culture=neutral, PublicKeyToken=fd3f43b5776a962b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\PublicDomain.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.1.1.3, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.XLS, Version=5.8.5.3, Culture=neutral, PublicKeyToken=7fdbc5e92357a8da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\Spire.XLS.dll</HintPath>
+    </Reference>
+    <Reference Include="SX, Version=2.1.6.9, Culture=neutral, PublicKeyToken=882b9c044052e7f6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\SX.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Web, Version=9.403.0.62, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Projects\REPO_LRS\trunk\LrsPlayPaq\ServiceComponents\Syncfusion.XlsIO.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyVersion.cs" />
+    <Compile Include="Bll\BusinessException.cs" />
+    <Compile Include="Bll\BusinessExceptionFactory.cs" />
+    <Compile Include="Bll\WLTableController.cs" />
+    <Compile Include="Bll\WLTableMessagesController.cs" />
+    <Compile Include="Dal\WLTableBaseDb.cs" />
+    <Compile Include="Dal\WLTableDb.cs" />
+    <Compile Include="Dal\WLTableMessagesBaseDb.cs" />
+    <Compile Include="Dal\WLTableMessagesDb.cs" />
+    <Compile Include="Dto\WLTableDto.cs" />
+    <Compile Include="Dto\WLTableMessagesDto.cs" />
+    <Compile Include="ExcelTest.cs" />
+    <Compile Include="HttpUtils.cs" />
+    <Compile Include="iQueueTest.cs" />
+    <Compile Include="OldCode.cs" />
+    <Compile Include="OldFuncs.cs" />
+    <Compile Include="PdfGenerator.cs" />
+    <Compile Include="PostgreSQLUtils.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ResponsesDAL.cs" />
+    <Compile Include="SoapParser.cs" />
+    <Compile Include="Web References\iQueue\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\SmsProxy\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Srv2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\TT\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ws\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WsTools.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://dpolrssrv/Srv2/Srv2.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Srv2\</RelPath>
+      <UpdateFromURL>http://dpolrssrv/Srv2/Srv2.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ConApp_VS2k8_Srv2_Srv2</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/LrsGuestConnectWs/GuestConnect.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\iQueue\</RelPath>
+      <UpdateFromURL>http://localhost/LrsGuestConnectWs/GuestConnect.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ConApp_VS2k8_iQueue_GuestConnect</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/LRSTableTrackerWS/TableTracker.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\TT\</RelPath>
+      <UpdateFromURL>http://localhost/LRSTableTrackerWS/TableTracker.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ConApp_VS2k8_TT_TableTracker</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://smsproxyws.pager.net/WSMailer.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SmsProxy\</RelPath>
+      <UpdateFromURL>http://smsproxyws.pager.net/WSMailer.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ConApp_VS2k8_SmsProxy_WSMailer</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://wswl.smsvalet.com/Lenovo.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ws\</RelPath>
+      <UpdateFromURL>http://wswl.smsvalet.com/Lenovo.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ConApp_VS2k8_ws_Lenovo</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ws\ActionReturnOfIncomingSmsList.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ws\ActionReturnOfLocationConfig.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ws\ActionReturnOfLocationInfo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ws\ActionReturnOfLocationSyncConfig.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ws\ActionReturnOfSendSmsReturnValues.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ws\Lenovo.disco" />
+    <None Include="Web References\ws\Lenovo.wsdl" />
+    <None Include="Web References\ws\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\TT\LRSTablerTrackerResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\TT\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\TT\TableTracker.disco" />
+    <None Include="Web References\TT\TableTracker.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dlls\Lsi.LrsSrv2Bll.dll" />
+    <Content Include="dlls\NativeExcel.dll" />
+    <Content Include="dlls\SX.dll" />
+    <Content Include="dlls\Syncfusion.Compression.Base.dll" />
+    <Content Include="dlls\Syncfusion.Core.dll" />
+    <Content Include="dlls\Syncfusion.XlsIO.Base.dll" />
+    <None Include="Web References\iQueue\ActionReturnOfGetCompanyInfoReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfGetCompanyLogoReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfGetGuestsReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfGetSectionBackgroundReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfGetTablesReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfPageGuestReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfPageGuestStatus.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfRestoreConfigurationReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfSaveConfigStatus.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfSaveGuestStatus.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfSaveSectionBackgroundReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfSaveTableStatus.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfSendSmsReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\ActionReturnOfSendSmsStatus.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\iQueue\GuestConnect.disco" />
+    <None Include="Web References\iQueue\GuestConnect.wsdl" />
+    <None Include="Web References\iQueue\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Srv2\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Srv2\SaveSurveyResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Srv2\SaveSurveyStructureResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Srv2\Srv2.disco" />
+    <None Include="Web References\SmsProxy\ActionReturnOfArrayOfString.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\SmsProxy\ActionReturnOfBoolean.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\SmsProxy\ActionReturnOfIsPremiumReturnObj.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\SmsProxy\ActionReturnOfSmsReturnObj.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\SmsProxy\ActionReturnOfString.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\SmsProxy\ClientMailSendReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\SmsProxy\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\SmsProxy\WSMailer.disco" />
+    <None Include="Web References\SmsProxy\WSMailer.wsdl" />
+    <None Include="Web References\Srv2\Srv2.wsdl" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

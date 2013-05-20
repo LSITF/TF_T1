@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://lsi.software.pl/WSMailer/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://lsi.software.pl/WSMailer/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://lsi.software.pl/WSMailer/">
+      <s:element name="SendMailTemplate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dto" type="tns:ClientSendMailTemplate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ClientSendMailTemplate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ToAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ToPerson" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MailTemplateId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientMailId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MailReplacement" type="tns:ArrayOfReplacement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfReplacement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Replacement" nillable="true" type="tns:Replacement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Replacement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentString" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NewString" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendMailTemplateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendMailTemplateResult" type="tns:ClientMailSendReturn" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ClientMailSendReturn">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MailID" nillable="true" type="s:long" />
+        </s:sequence>
+        <s:attribute name="SendStatus" type="tns:StatusMailReturn" use="required" />
+        <s:attribute name="ErrorSendMsg" type="s:string" />
+      </s:complexType>
+      <s:simpleType name="StatusMailReturn">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="SendOk" />
+          <s:enumeration value="Error" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SendSms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SenderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Carrier" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isRequiredEnrollMsg" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="EnrollMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSmsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSmsResult" type="tns:ActionReturnOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfBoolean">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AddData" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfBoolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ActionReturnStatusEnumOfBoolean">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SaveNewPhoneNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SenderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Carrier" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EnrollMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveNewPhoneNoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveNewPhoneNoResult" type="tns:ActionReturnOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemovePhoneNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PhoneNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemovePhoneNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemovePhoneNumberResult" type="tns:ActionReturnOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsCallNeeded">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsCallNeededResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsCallNeededResult" type="tns:ActionReturnOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSms2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="senderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="carrier" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isRequiredEnrollMsg" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="enrollMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSms2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSms2Result" type="tns:ActionReturnOfBoolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="messageId" nillable="true" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="enrollMessageId" nillable="true" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSms3">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="senderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="carrier" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isRequiredEnrollMsg" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="enrollMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="tns:LSIDictAppType" />
+            <s:element minOccurs="1" maxOccurs="1" name="minSendHour" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="maxSendHour" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="LSIDictAppType">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="PP" />
+          <s:enumeration value="NP" />
+          <s:enumeration value="CAS" />
+          <s:enumeration value="Survey" />
+          <s:enumeration value="Valet" />
+          <s:enumeration value="WaiterLocator" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SendSms3Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSms3Result" type="tns:ActionReturnOfBoolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="messageId" nillable="true" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="enrollMessageId" nillable="true" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveNewPhoneNo2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="senderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="carrier" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="enrollMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveNewPhoneNo2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveNewPhoneNo2Result" type="tns:ActionReturnOfBoolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="messageId" nillable="true" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveNewPhoneNo3">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="senderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="carrier" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="enrollMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="tns:LSIDictAppType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveNewPhoneNo3Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveNewPhoneNo3Result" type="tns:ActionReturnOfBoolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="messageId" nillable="true" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSmsWithBackup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="senderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="countryCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isRequiredEnrollMsg" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="enrollMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="tns:LSIDictAppType" />
+            <s:element minOccurs="0" maxOccurs="1" name="subType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="internalId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSmsWithBackupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSmsWithBackupResult" type="tns:ActionReturnOfSmsReturnObj" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfSmsReturnObj">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:SmsReturnObj" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfSmsReturnObj" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SmsReturnObj">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RoamingCarrierUsed" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="MsgID" nillable="true" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnrollMsgID" nillable="true" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:SmsReturnValues" />
+          <s:element minOccurs="0" maxOccurs="1" name="Carrier" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClearPhoneNo" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SmsReturnValues">
+        <s:restriction base="s:string">
+          <s:enumeration value="OptOut" />
+          <s:enumeration value="SendSuccessfuly" />
+          <s:enumeration value="Error" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ActionReturnStatusEnumOfSmsReturnObj">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SaveNewPhoneNoWithBackup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="senderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="countryCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="enrollMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="tns:LSIDictAppType" />
+            <s:element minOccurs="0" maxOccurs="1" name="subType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="internalId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveNewPhoneNoWithBackupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveNewPhoneNoWithBackupResult" type="tns:ActionReturnOfSmsReturnObj" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ClearPhoneNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="countryCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ClearPhoneNoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ClearPhoneNoResult" type="tns:ActionReturnOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ActionReturnStatusEnumOfString">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SaveNewPhoneNoWithBackup2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="senderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="countryCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="enrollMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="tns:LSIDictAppType" />
+            <s:element minOccurs="0" maxOccurs="1" name="subType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="roamingSubType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="internalId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveNewPhoneNoWithBackup2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveNewPhoneNoWithBackup2Result" type="tns:ActionReturnOfSmsReturnObj" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSmsWithBackup2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="senderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="countryCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isRequiredEnrollMsg" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="enrollMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="tns:LSIDictAppType" />
+            <s:element minOccurs="0" maxOccurs="1" name="subType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="roamingSubType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="internalId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="createNewConversation" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="tariff" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSmsWithBackup2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSmsWithBackup2Result" type="tns:ActionReturnOfSmsReturnObj" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSmsWithBackupParams">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="senderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="countryCode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isRequiredEnrollMsg" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="enrollMessage" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="tns:LSIDictAppType" />
+            <s:element minOccurs="0" maxOccurs="1" name="subType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="roamingSubType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="internalId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="createNewConversation" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="tariff" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="tns:ArrayOfParam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Param" nillable="true" type="tns:Param" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Param">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendSmsWithBackupParamsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSmsWithBackupParamsResult" type="tns:ActionReturnOfSmsReturnObj" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSmsList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="applicationList" type="tns:ArrayOfLSIDictAppType" />
+            <s:element minOccurs="1" maxOccurs="1" name="utcLastModify" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLSIDictAppType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LSIDictAppType" type="tns:LSIDictAppType" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSmsListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSmsListResult" type="tns:ActionReturnOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ActionReturnStatusEnumOfArrayOfString">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="IsPermium">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="countryCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsPermiumResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsPermiumResult" type="tns:ActionReturnOfBoolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsPermiumOperator">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="countryCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsPermiumOperatorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsPermiumOperatorResult" type="tns:ActionReturnOfIsPremiumReturnObj" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionReturnOfIsPremiumReturnObj">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AddData" type="tns:IsPremiumReturnObj" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ActionReturnStatusEnumOfIsPremiumReturnObj" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IsPremiumReturnObj">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OperatorId" type="s:string" />
+        </s:sequence>
+        <s:attribute name="IsPermium" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:simpleType name="ActionReturnStatusEnumOfIsPremiumReturnObj">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="OK" />
+          <s:enumeration value="Failed" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="IsPermiumOperator2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="countryCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="applicationType" type="tns:LSIDictAppType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsPermiumOperator2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsPermiumOperator2Result" type="tns:ActionReturnOfIsPremiumReturnObj" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SendMailTemplateSoapIn">
+    <wsdl:part name="parameters" element="tns:SendMailTemplate" />
+  </wsdl:message>
+  <wsdl:message name="SendMailTemplateSoapOut">
+    <wsdl:part name="parameters" element="tns:SendMailTemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSms" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveNewPhoneNoSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveNewPhoneNo" />
+  </wsdl:message>
+  <wsdl:message name="SaveNewPhoneNoSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveNewPhoneNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemovePhoneNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:RemovePhoneNumber" />
+  </wsdl:message>
+  <wsdl:message name="RemovePhoneNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:RemovePhoneNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsCallNeededSoapIn">
+    <wsdl:part name="parameters" element="tns:IsCallNeeded" />
+  </wsdl:message>
+  <wsdl:message name="IsCallNeededSoapOut">
+    <wsdl:part name="parameters" element="tns:IsCallNeededResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSms2SoapIn">
+    <wsdl:part name="parameters" element="tns:SendSms2" />
+  </wsdl:message>
+  <wsdl:message name="SendSms2SoapOut">
+    <wsdl:part name="parameters" element="tns:SendSms2Response" />
+  </wsdl:message>
+  <wsdl:message name="SendSms3SoapIn">
+    <wsdl:part name="parameters" element="tns:SendSms3" />
+  </wsdl:message>
+  <wsdl:message name="SendSms3SoapOut">
+    <wsdl:part name="parameters" element="tns:SendSms3Response" />
+  </wsdl:message>
+  <wsdl:message name="SaveNewPhoneNo2SoapIn">
+    <wsdl:part name="parameters" element="tns:SaveNewPhoneNo2" />
+  </wsdl:message>
+  <wsdl:message name="SaveNewPhoneNo2SoapOut">
+    <wsdl:part name="parameters" element="tns:SaveNewPhoneNo2Response" />
+  </wsdl:message>
+  <wsdl:message name="SaveNewPhoneNo3SoapIn">
+    <wsdl:part name="parameters" element="tns:SaveNewPhoneNo3" />
+  </wsdl:message>
+  <wsdl:message name="SaveNewPhoneNo3SoapOut">
+    <wsdl:part name="parameters" element="tns:SaveNewPhoneNo3Response" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsWithBackupSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSmsWithBackup" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsWithBackupSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSmsWithBackupResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveNewPhoneNoWithBackupSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveNewPhoneNoWithBackup" />
+  </wsdl:message>
+  <wsdl:message name="SaveNewPhoneNoWithBackupSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveNewPhoneNoWithBackupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ClearPhoneNoSoapIn">
+    <wsdl:part name="parameters" element="tns:ClearPhoneNo" />
+  </wsdl:message>
+  <wsdl:message name="ClearPhoneNoSoapOut">
+    <wsdl:part name="parameters" element="tns:ClearPhoneNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveNewPhoneNoWithBackup2SoapIn">
+    <wsdl:part name="parameters" element="tns:SaveNewPhoneNoWithBackup2" />
+  </wsdl:message>
+  <wsdl:message name="SaveNewPhoneNoWithBackup2SoapOut">
+    <wsdl:part name="parameters" element="tns:SaveNewPhoneNoWithBackup2Response" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsWithBackup2SoapIn">
+    <wsdl:part name="parameters" element="tns:SendSmsWithBackup2" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsWithBackup2SoapOut">
+    <wsdl:part name="parameters" element="tns:SendSmsWithBackup2Response" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsWithBackupParamsSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSmsWithBackupParams" />
+  </wsdl:message>
+  <wsdl:message name="SendSmsWithBackupParamsSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSmsWithBackupParamsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSmsListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSmsList" />
+  </wsdl:message>
+  <wsdl:message name="GetSmsListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSmsListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsPermiumSoapIn">
+    <wsdl:part name="parameters" element="tns:IsPermium" />
+  </wsdl:message>
+  <wsdl:message name="IsPermiumSoapOut">
+    <wsdl:part name="parameters" element="tns:IsPermiumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsPermiumOperatorSoapIn">
+    <wsdl:part name="parameters" element="tns:IsPermiumOperator" />
+  </wsdl:message>
+  <wsdl:message name="IsPermiumOperatorSoapOut">
+    <wsdl:part name="parameters" element="tns:IsPermiumOperatorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsPermiumOperator2SoapIn">
+    <wsdl:part name="parameters" element="tns:IsPermiumOperator2" />
+  </wsdl:message>
+  <wsdl:message name="IsPermiumOperator2SoapOut">
+    <wsdl:part name="parameters" element="tns:IsPermiumOperator2Response" />
+  </wsdl:message>
+  <wsdl:portType name="WSMailerSoap">
+    <wsdl:operation name="SendMailTemplate">
+      <wsdl:input message="tns:SendMailTemplateSoapIn" />
+      <wsdl:output message="tns:SendMailTemplateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <wsdl:input message="tns:SendSmsSoapIn" />
+      <wsdl:output message="tns:SendSmsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNo">
+      <wsdl:input message="tns:SaveNewPhoneNoSoapIn" />
+      <wsdl:output message="tns:SaveNewPhoneNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemovePhoneNumber">
+      <wsdl:input message="tns:RemovePhoneNumberSoapIn" />
+      <wsdl:output message="tns:RemovePhoneNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsCallNeeded">
+      <wsdl:input message="tns:IsCallNeededSoapIn" />
+      <wsdl:output message="tns:IsCallNeededSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSms2">
+      <wsdl:input message="tns:SendSms2SoapIn" />
+      <wsdl:output message="tns:SendSms2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSms3">
+      <wsdl:input message="tns:SendSms3SoapIn" />
+      <wsdl:output message="tns:SendSms3SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNo2">
+      <wsdl:input message="tns:SaveNewPhoneNo2SoapIn" />
+      <wsdl:output message="tns:SaveNewPhoneNo2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNo3">
+      <wsdl:input message="tns:SaveNewPhoneNo3SoapIn" />
+      <wsdl:output message="tns:SaveNewPhoneNo3SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSmsWithBackup">
+      <wsdl:input message="tns:SendSmsWithBackupSoapIn" />
+      <wsdl:output message="tns:SendSmsWithBackupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNoWithBackup">
+      <wsdl:input message="tns:SaveNewPhoneNoWithBackupSoapIn" />
+      <wsdl:output message="tns:SaveNewPhoneNoWithBackupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearPhoneNo">
+      <wsdl:input message="tns:ClearPhoneNoSoapIn" />
+      <wsdl:output message="tns:ClearPhoneNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNoWithBackup2">
+      <wsdl:input message="tns:SaveNewPhoneNoWithBackup2SoapIn" />
+      <wsdl:output message="tns:SaveNewPhoneNoWithBackup2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSmsWithBackup2">
+      <wsdl:input message="tns:SendSmsWithBackup2SoapIn" />
+      <wsdl:output message="tns:SendSmsWithBackup2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSmsWithBackupParams">
+      <wsdl:input message="tns:SendSmsWithBackupParamsSoapIn" />
+      <wsdl:output message="tns:SendSmsWithBackupParamsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSmsList">
+      <wsdl:input message="tns:GetSmsListSoapIn" />
+      <wsdl:output message="tns:GetSmsListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsPermium">
+      <wsdl:input message="tns:IsPermiumSoapIn" />
+      <wsdl:output message="tns:IsPermiumSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsPermiumOperator">
+      <wsdl:input message="tns:IsPermiumOperatorSoapIn" />
+      <wsdl:output message="tns:IsPermiumOperatorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsPermiumOperator2">
+      <wsdl:input message="tns:IsPermiumOperator2SoapIn" />
+      <wsdl:output message="tns:IsPermiumOperator2SoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSMailerSoap" type="tns:WSMailerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendMailTemplate">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SendMailTemplate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SendSms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNo">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SaveNewPhoneNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemovePhoneNumber">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/RemovePhoneNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCallNeeded">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/IsCallNeeded" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms2">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SendSms2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms3">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SendSms3" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNo2">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SaveNewPhoneNo2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNo3">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SaveNewPhoneNo3" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSmsWithBackup">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SendSmsWithBackup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNoWithBackup">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SaveNewPhoneNoWithBackup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearPhoneNo">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/ClearPhoneNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNoWithBackup2">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SaveNewPhoneNoWithBackup2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSmsWithBackup2">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SendSmsWithBackup2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSmsWithBackupParams">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/SendSmsWithBackupParams" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSmsList">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/GetSmsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPermium">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/IsPermium" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPermiumOperator">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/IsPermiumOperator" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPermiumOperator2">
+      <soap:operation soapAction="http://lsi.software.pl/WSMailer/IsPermiumOperator2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSMailerSoap12" type="tns:WSMailerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendMailTemplate">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SendMailTemplate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SendSms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNo">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SaveNewPhoneNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemovePhoneNumber">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/RemovePhoneNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCallNeeded">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/IsCallNeeded" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms2">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SendSms2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms3">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SendSms3" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNo2">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SaveNewPhoneNo2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNo3">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SaveNewPhoneNo3" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSmsWithBackup">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SendSmsWithBackup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNoWithBackup">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SaveNewPhoneNoWithBackup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearPhoneNo">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/ClearPhoneNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewPhoneNoWithBackup2">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SaveNewPhoneNoWithBackup2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSmsWithBackup2">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SendSmsWithBackup2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSmsWithBackupParams">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/SendSmsWithBackupParams" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSmsList">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/GetSmsList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPermium">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/IsPermium" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPermiumOperator">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/IsPermiumOperator" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPermiumOperator2">
+      <soap12:operation soapAction="http://lsi.software.pl/WSMailer/IsPermiumOperator2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSMailer">
+    <wsdl:port name="WSMailerSoap" binding="tns:WSMailerSoap">
+      <soap:address location="http://smsproxyws.pager.net/WSMailer.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSMailerSoap12" binding="tns:WSMailerSoap12">
+      <soap12:address location="http://smsproxyws.pager.net/WSMailer.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
