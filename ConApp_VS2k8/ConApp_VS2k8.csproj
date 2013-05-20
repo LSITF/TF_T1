@@ -295,6 +295,7 @@
     <Content Include="dlls\Syncfusion.Compression.Base.dll" />
     <Content Include="dlls\Syncfusion.Core.dll" />
     <Content Include="dlls\Syncfusion.XlsIO.Base.dll" />
+    <None Include="SoapParser.cs" />
     <None Include="Web References\iQueue\ActionReturnOfGetCompanyInfoReturn.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
